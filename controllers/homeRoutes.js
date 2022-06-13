@@ -6,6 +6,14 @@ router.get('/', (req, res) => {
   res.render('homepage');
 });
 
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
 // Prevent non logged in users from viewing the homepage
 // router.get('/', withAuth, async (req, res) => {
 //     try {
