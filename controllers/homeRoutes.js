@@ -1,9 +1,31 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { Model } = require('sequelize/types');
+const { User, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', (req, res) => {
-  res.render('homepage');
+router.get('/', async (req, res) => {
+  try{
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name"]
+        }
+      ]
+
+    })
+    const post = postData.map((posts) => posts.get({plain: true}))
+    res.render('homepage', {
+      post,
+      logged_in: req.session.logged_in
+    })
+
+  } catch (err) {
+    res.status(500).json(err);
+}
+
+
+  
 });
 
 router.get('/signup', (req, res) => {
