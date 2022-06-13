@@ -14,6 +14,10 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/post', (req, res) => {
+  res.render('post');
+});
+
 // Prevent non logged in users from viewing the homepage
 // router.get('/', withAuth, async (req, res) => {
 //     try {
